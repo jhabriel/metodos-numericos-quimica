@@ -24,6 +24,16 @@ assert(abs(C(end, 2) - cB(10)) < 1e-4, 'perfil de B');
 [~, Ci] = euler_implicito([-k1 0 0; k1 -k2 0; 0 k2 0], [0 10], [1; 0; 0], 2000);
 assert(abs(Ci(end, 2) - cB(10)) < 5e-3, 'Euler implicito, sistema lineal');
 
+% f que devuelve un vector FILA (error comun): debe dar lo mismo que con columna
+frow = @(t, y) [y(2), -y(1)];
+fcol = @(t, y) [y(2); -y(1)];
+[~, Yr] = heun(frow, [0 1], [1; 0], 50);
+[~, Yc] = heun(fcol, [0 1], [1; 0], 50);
+assert(norm(Yr - Yc) < 1e-14, 'heun con f que devuelve fila');
+[~, Yr] = euler_explicito(frow, [0 1], [1; 0], 50);
+[~, Yc] = euler_explicito(fcol, [0 1], [1; 0], 50);
+assert(norm(Yr - Yc) < 1e-14, 'euler_explicito con f que devuelve fila');
+
 % Euler implicito recibe la matriz A, no un handle
 ok = false;
 try, euler_implicito(@(t, y) -y, [0 1], 1, 10); catch, ok = true; end

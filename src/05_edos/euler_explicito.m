@@ -20,7 +20,8 @@ Y = zeros(n+1, numel(y0));
 Y(1, :) = y0';
 y = y0;
 for k = 1:n
-    y = y + h * f(t(k), y);
+    fy = f(t(k), y);
+    y = y + h * fy(:);                  % fy(:) fuerza columna (por si f devuelve fila)
     Y(k+1, :) = y';
 end
 end

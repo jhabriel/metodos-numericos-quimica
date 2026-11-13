@@ -1,14 +1,14 @@
-function [x, iter, hist] = gauss_seidel(A, b, x0, tol, maxit)
+function [x, iter, historia] = gauss_seidel(A, b, x0, tol, maxit)
 % GAUSS_SEIDEL  Resuelve A*x = b por el metodo iterativo de Gauss-Seidel.
 %
-%   [x, iter, hist] = gauss_seidel(A, b, x0, tol, maxit)
+%   [x, iter, historia] = gauss_seidel(A, b, x0, tol, maxit)
 %
 %   Mismos argumentos que jacobi. La diferencia es que cada componente
 %   usa de inmediato los valores ya actualizados en la misma iteracion:
 %
 %   x_i^{(k+1)} = ( b_i - sum_{j<i} a_ij x_j^{(k+1)} - sum_{j>i} a_ij x_j^{(k)} ) / a_ii
 %
-%   hist  : matriz [k, norm(dx, inf)]
+%   historia : matriz [k, norm(dx, inf)]
 
 n = size(A, 1);
 b = b(:);
@@ -23,7 +23,7 @@ if any(diag(A) == 0)
 end
 
 x = x0(:);
-hist = zeros(0, 2);
+historia = zeros(0, 2);
 for iter = 1:maxit
     xold = x;
     for i = 1:n
@@ -31,7 +31,7 @@ for iter = 1:maxit
         x(i) = (b(i) - s) / A(i, i);
     end
     err = norm(x - xold, inf);
-    hist(end+1, :) = [iter, err]; %#ok<AGROW>
+    historia(end+1, :) = [iter, err]; %#ok<AGROW>
     if err < tol
         return
     end

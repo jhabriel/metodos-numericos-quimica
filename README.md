@@ -2,8 +2,13 @@
 
 Implementaciones didácticas de métodos de cálculo numérico en **MATLAB/Octave**,
 pensadas para estudiantes de la Facultad de Ciencias Químicas. El código prioriza
-la claridad: cada método está escrito "a mano" (sin llamar a `\`, `lu`, `interp1`,
-etc.) y se valida con pruebas automáticas.
+la claridad: cada método de `src/` está escrito "a mano" (sin llamar a `\`, `lu`,
+`interp1`, etc.); los ejemplos solo usan funciones nativas como referencia, para
+graficar o para evaluar (`polyval`). Los métodos se validan con pruebas automáticas
+y los ejemplos con la solución exacta, además de una prueba de humo que los ejecuta.
+
+**Requisitos:** probado con GNU Octave 9.2. Está escrito para funcionar también en
+MATLAB, pero esa combinación todavía no se ha probado.
 
 ## Estructura
 
@@ -22,7 +27,7 @@ etc.) y se valida con pruebas automáticas.
 Desde la raíz del repositorio:
 
 ```matlab
-addpath(genpath('src'));
+addpath(genpath(fullfile(pwd, 'src')));   % ruta absoluta (pwd = raíz del repositorio)
 
 f  = @(x) x.^2 - 2;
 x  = biseccion(f, 0, 2, 1e-10);
@@ -33,6 +38,10 @@ x = resolver_lu(A, b);
 ```
 
 Cada función documenta sus argumentos con `help nombre_funcion`.
+
+> Usa siempre la ruta **absoluta** (`fullfile(pwd, 'src')`): con `addpath(genpath('src'))`
+> Octave avisa de rutas que "no existen" al ejecutar un ejemplo con `run`, porque `run`
+> cambia temporalmente de carpeta.
 
 ### Ejemplos
 

@@ -2,7 +2,7 @@
 % Raiz de f(x) = x^3 - 2x - 5 = 0 (ecuacion clasica de Wallis/Newton)
 % por biseccion y por Newton-Raphson.
 %
-% Ejecutar desde cualquier carpeta:  run('ejemplos/ej_01_ecuacion_no_lineal.m')
+% Ejecutar:  run('ejemplos/ej_01_ecuacion_no_lineal.m')
 
 clear; clc; close all;
 addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));

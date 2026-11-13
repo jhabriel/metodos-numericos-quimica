@@ -36,11 +36,11 @@ xex = [0.5; 0; -pi/6];  % valor exacto (de referencia)
 tol = 1e-12;
 maxit = 50;
 x = x0;
-hist = zeros(0, 3);                        % columnas: k, ||dx||, ||F(x)||
+historia = zeros(0, 3);                        % columnas: k, ||dx||, ||F(x)||
 for k = 1:maxit
     dx = resolver_lu(J(x), -F(x));         % resolver J*dx = -F
     x = x + dx;
-    hist(end+1, :) = [k, norm(dx), norm(F(x))];
+    historia(end+1, :) = [k, norm(dx), norm(F(x))];
     if norm(dx) < tol
         break
     end
@@ -52,9 +52,9 @@ fprintf('x = [%s]\n', num2str(x', ' %.10f'));
 fprintf('||F(x)|| = %.2e\n\n', norm(F(x)));
 
 fprintf('Historia:\n   k    ||dx||       ||F||\n');
-fprintf('%4d  %.3e  %.3e\n', hist');
+fprintf('%4d  %.3e  %.3e\n', historia');
 
 figure;
-semilogy(hist(:, 1), hist(:, 2), 'o-', hist(:, 1), hist(:, 3), 's-', 'LineWidth', 1.3);
+semilogy(historia(:, 1), historia(:, 2), 'o-', historia(:, 1), historia(:, 3), 's-', 'LineWidth', 1.3);
 xlabel('iteracion'); grid on; legend('||\Deltax||', '||F(x)||');
 title('Newton para sistemas: convergencia cuadratica');

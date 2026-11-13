@@ -1,7 +1,7 @@
-function [x, iter, hist] = jacobi(A, b, x0, tol, maxit)
+function [x, iter, historia] = jacobi(A, b, x0, tol, maxit)
 % JACOBI  Resuelve A*x = b por el metodo iterativo de Jacobi.
 %
-%   [x, iter, hist] = jacobi(A, b, x0, tol, maxit)
+%   [x, iter, historia] = jacobi(A, b, x0, tol, maxit)
 %
 %   A     : matriz cuadrada con diagonal no nula (convergencia garantizada
 %           si es diagonalmente dominante por filas)
@@ -12,7 +12,7 @@ function [x, iter, hist] = jacobi(A, b, x0, tol, maxit)
 %
 %   x_i^{(k+1)} = ( b_i - sum_{j~=i} a_ij x_j^{(k)} ) / a_ii
 %
-%   hist  : matriz [k, norm(dx, inf)]
+%   historia : matriz [k, norm(dx, inf)]
 
 n = size(A, 1);
 b = b(:);
@@ -27,7 +27,7 @@ if any(diag(A) == 0)
 end
 
 x = x0(:);
-hist = zeros(0, 2);
+historia = zeros(0, 2);
 for iter = 1:maxit
     xn = zeros(n, 1);
     for i = 1:n
@@ -35,7 +35,7 @@ for iter = 1:maxit
         xn(i) = (b(i) - s) / A(i, i);
     end
     err = norm(xn - x, inf);
-    hist(end+1, :) = [iter, err]; %#ok<AGROW>
+    historia(end+1, :) = [iter, err]; %#ok<AGROW>
     x = xn;
     if err < tol
         return

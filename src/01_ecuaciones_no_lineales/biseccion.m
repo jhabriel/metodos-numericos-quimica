@@ -1,7 +1,7 @@
-function [x, iter, hist] = biseccion(f, a, b, tol, maxit)
+function [x, iter, historia] = biseccion(f, a, b, tol, maxit)
 % BISECCION  Raiz de f(x)=0 en [a,b] por el metodo de biseccion.
 %
-%   [x, iter, hist] = biseccion(f, a, b, tol, maxit)
+%   [x, iter, historia] = biseccion(f, a, b, tol, maxit)
 %
 %   f     : handle de la funcion, f(x) escalar
 %   a, b  : extremos del intervalo, con f(a)*f(b) < 0
@@ -10,7 +10,7 @@ function [x, iter, hist] = biseccion(f, a, b, tol, maxit)
 %
 %   x     : aproximacion de la raiz
 %   iter  : iteraciones realizadas
-%   hist  : matriz [k, a, b, c, f(c)] con la historia
+%   historia : matriz [k, a, b, c, f(c)] con la historia
 
 if nargin < 4, tol = 1e-8; end
 if nargin < 5, maxit = 100; end
@@ -20,12 +20,12 @@ if fa * fb > 0
     error('biseccion:intervalo', 'f(a) y f(b) deben tener signos opuestos.');
 end
 
-hist = zeros(0, 5);
+historia = zeros(0, 5);
 x = a;
 for iter = 1:maxit
     c = (a + b) / 2;
     fc = f(c);
-    hist(end+1, :) = [iter, a, b, c, fc]; %#ok<AGROW>
+    historia(end+1, :) = [iter, a, b, c, fc]; %#ok<AGROW>
     if fc == 0 || (b - a) / 2 < tol
         x = c;
         return

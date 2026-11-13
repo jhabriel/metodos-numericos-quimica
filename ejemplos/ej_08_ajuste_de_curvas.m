@@ -45,28 +45,25 @@ legend('Datos', sprintf('Ajuste (R^2 = %.4f)', r2A), 'Location', 'northwest');
 title('A) Curva de calibracion');
 
 %% B) Polinomios: Cp(T)
-% Se escala T a kK (t = T/1000): con T en kelvin las potencias T^3 son enormes y
-% Z'*Z queda muy mal condicionada (las ecuaciones normales empeoran el problema).
 T  = [300 400 500 600 700 800 900 1000]';      % K
 Cp = [37.2 41.3 44.6 47.3 49.6 51.4 52.9 54.3]';   % J/(mol K)
-t  = T / 1000;
 
-Z2 = [ones(size(t)), t, t.^2];                 % columnas: 1, t, t^2
-Z3 = [ones(size(t)), t, t.^2, t.^3];           % columnas: 1, t, t^2, t^3
+Z2 = [ones(size(T)), T, T.^2];                 % columnas: 1, T, T^2
+Z3 = [ones(size(T)), T, T.^2, T.^3];           % columnas: 1, T, T^2, T^3
 a2 = resolver_lu(Z2' * Z2, Z2' * Cp);
 a3 = resolver_lu(Z3' * Z3, Z3' * Cp);
 r2_2 = R2(Cp, Z2 * a2);
 r2_3 = R2(Cp, Z3 * a3);
 
-fprintf('B) Cp(T) con t = T/1000 (potencias ascendentes):\n');
-fprintf('   grado 2: coef = [%s],  R^2 = %.6f\n', num2str(a2', ' %.3f'), r2_2);
-fprintf('   grado 3: coef = [%s],  R^2 = %.6f\n\n', num2str(a3', ' %.3f'), r2_3);
+fprintf('B) Cp(T) (coeficientes en potencias ascendentes de T):\n');
+fprintf('   grado 2: coef = [%s],  R^2 = %.6f\n', num2str(a2', ' %.4e'), r2_2);
+fprintf('   grado 3: coef = [%s],  R^2 = %.6f\n\n', num2str(a3', ' %.4e'), r2_3);
 
 figure;
-tt = linspace(0.3, 1.0, 200)';
+Tg = linspace(300, 1000, 200)';
 plot(T, Cp, 'ko', 'MarkerFaceColor', 'k'); hold on;
-plot(1000 * tt, a2(1) + a2(2)*tt + a2(3)*tt.^2, 'b-', 'LineWidth', 1.3);
-plot(1000 * tt, a3(1) + a3(2)*tt + a3(3)*tt.^2 + a3(4)*tt.^3, 'r--', 'LineWidth', 1.3);
+plot(Tg, a2(1) + a2(2)*Tg + a2(3)*Tg.^2, 'b-', 'LineWidth', 1.3);
+plot(Tg, a3(1) + a3(2)*Tg + a3(3)*Tg.^2 + a3(4)*Tg.^3, 'r--', 'LineWidth', 1.3);
 xlabel('T (K)'); ylabel('C_p (J/mol K)'); grid on;
 legend('Datos', sprintf('Grado 2 (R^2=%.5f)', r2_2), sprintf('Grado 3 (R^2=%.5f)', r2_3), ...
        'Location', 'southeast');

@@ -17,8 +17,10 @@ Y(1, :) = y0';
 y = y0;
 for k = 1:n
     f1 = f(t(k), y);
+    f1 = f1(:);                         % fuerza columna (por si f devuelve fila)
     yp = y + h * f1;                    % predictor
     f2 = f(t(k+1), yp);
+    f2 = f2(:);
     y = y + h / 2 * (f1 + f2);          % corrector
     Y(k+1, :) = y';
 end
