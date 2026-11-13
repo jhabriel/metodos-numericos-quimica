@@ -10,6 +10,10 @@ assert(~isempty(archivos), 'no se encontraron ejemplos en ejemplos/');
 visible = get(0, 'defaultfigurevisible');
 set(0, 'defaultfigurevisible', 'off');
 
+% Sin pantalla (por ejemplo en GitHub Actions) Octave usa el motor gnuplot y
+% avisa de que esta desaconsejado. Es un aviso del entorno, no de los ejemplos.
+estado_aviso = warning('off', 'Octave:gnuplot-graphics');
+
 fallos = {};
 for i = 1:numel(archivos)
     ruta = fullfile(raiz, 'ejemplos', archivos(i).name);
@@ -27,6 +31,7 @@ end
 
 close all;
 set(0, 'defaultfigurevisible', visible);
+warning(estado_aviso);
 
 if ~isempty(fallos)
     error('Fallaron %d ejemplo(s):\n  %s', numel(fallos), strjoin(fallos, sprintf('\n  ')));

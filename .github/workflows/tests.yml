@@ -18,7 +18,7 @@ jobs:
     container: gnuoctave/octave:9.2.0
     steps:
       - name: Descargar el repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Ejecutar pruebas y ejemplos
         run: octave --no-gui --eval "run('tests/run_all_tests.m')"
