@@ -2,31 +2,24 @@
 
 [![Pruebas](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml)
 
-<p align="center">
-  <img alt="PASO OBLIGATORIO: ejecutar iniciar" src="https://img.shields.io/badge/%F0%9F%9A%A8_PASO_OBLIGATORIO-EJECUTAR_iniciar-red?style=for-the-badge">
-</p>
-
-> [!CAUTION]
-> ## 🚨🚨🚨 ANTES DE USAR CUALQUIER FUNCIÓN O EJEMPLO: ejecuta `iniciar` 🚨🚨🚨
+> [!IMPORTANT]
+> **Antes de usar las funciones o los ejemplos, ejecuta `iniciar`.**
 >
-> MATLAB y Octave **olvidan el path cada vez que se cierran**. Cada vez que abras el programa:
+> MATLAB y Octave olvidan el path cada vez que se cierran, así que al abrir el programa:
 >
-> 1. 📂 Ve a la **carpeta raíz** del repositorio (la que contiene `iniciar.m`).
-> 2. ⌨️ Escribe en la ventana de comandos:
+> 1. Ve a la carpeta raíz del repositorio (la que contiene `iniciar.m`).
+> 2. Escribe en la ventana de comandos:
 >
 >    ```matlab
 >    iniciar
 >    ```
 >
-> 3. ✅ Verás el mensaje `Listo: las funciones de src/ estan disponibles en esta sesion.`
->    A partir de ahí, los ejemplos y **tus propios scripts** (por ejemplo en `examen/`)
->    pueden llamar a las funciones sin agregar nada al path.
+> A partir de ahí, los ejemplos y tus propios scripts (por ejemplo en `examen/`) pueden
+> llamar a las funciones sin agregar nada al path.
 >
-> ❌ **Si no lo haces**, todo fallará con errores como `'biseccion' undefined`.
-> **No es un error de tu código**: solo falta ejecutar `iniciar`.
->
-> ¿No estás en la carpeta raíz? Ejecútalo con la ruta completa:
-> `run('/ruta/al/repositorio/iniciar.m')`
+> Si no lo haces, verás errores como `'biseccion' undefined`: no es un error de tu
+> código, solo falta ejecutar `iniciar`. Si no estás en la carpeta raíz, usa
+> `run('/ruta/al/repositorio/iniciar.m')`.
 
 Implementaciones didácticas de métodos de cálculo numérico en **MATLAB/Octave**,
 pensadas para estudiantes de Ingeniería Química e Ingeniería de Alimentos de la
