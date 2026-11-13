@@ -1,23 +1,25 @@
 % EJ_11_EDO_SIMPLE
-% Reaccion de segundo orden:   dC/dt = -k C^2,   C(0) = C0
-% Solucion analitica:          C(t) = C0 / (1 + k C0 t)
+% Reaccion de primer orden:   dC/dt = -k C,   C(0) = C0
+% Solucion analitica:         C(t) = C0 exp(-k t)
 % Se resuelve con Euler explicito, Euler implicito y Heun.
+% (Euler implicito se usa para sistemas lineales y' = A y; aqui A = -k.)
 %
 % Ejecutar:  run('ejemplos/ej_11_edo_simple.m')
 
 clear; clc; close all;
 addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
-k = 0.5;            % L/(mol s)
+k = 0.5;            % 1/s
 C0 = 2;             % mol/L
 tf = 10;            % s
-f = @(t, C) -k * C.^2;
-Cex = @(t) C0 ./ (1 + k * C0 * t);
+f = @(t, C) -k * C;
+A = -k;                          % dC/dt = A*C (lo usa Euler implicito)
+Cex = @(t) C0 * exp(-k * t);
 
 %% Una corrida con n = 20 pasos
 n = 20;
 [t, Ce] = euler_explicito(f, [0 tf], C0, n);
-[~, Ci] = euler_implicito(f, [0 tf], C0, n);
+[~, Ci] = euler_implicito(A, [0 tf], C0, n);
 [~, Ch] = heun(f, [0 tf], C0, n);
 
 fprintf('n = %d pasos (h = %.2f s)\n', n, tf / n);
@@ -30,7 +32,7 @@ ns = [10 20 40 80 160];
 err = zeros(numel(ns), 3);
 for j = 1:numel(ns)
     [~, A1] = euler_explicito(f, [0 tf], C0, ns(j));
-    [~, A2] = euler_implicito(f, [0 tf], C0, ns(j));
+    [~, A2] = euler_implicito(A, [0 tf], C0, ns(j));
     [~, A3] = heun(f, [0 tf], C0, ns(j));
     err(j, :) = abs([A1(end), A2(end), A3(end)] - Cex(tf));
 end
@@ -46,7 +48,7 @@ tt = linspace(0, tf, 200);
 plot(tt, Cex(tt), 'k-', t, Ce, 'ro--', t, Ci, 'gs--', t, Ch, 'b^--', 'LineWidth', 1.2);
 xlabel('t (s)'); ylabel('C (mol/L)'); grid on;
 legend('Exacta', 'E. explicito', 'E. implicito', 'Heun');
-title('2A \rightarrow productos, n = 20');
+title('A \rightarrow productos (1er orden), n = 20');
 
 subplot(1, 2, 2);
 loglog(tf ./ ns, err(:, 1), 'o-', tf ./ ns, err(:, 2), 's-', tf ./ ns, err(:, 3), '^-', 'LineWidth', 1.2);

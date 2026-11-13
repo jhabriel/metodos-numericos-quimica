@@ -10,12 +10,12 @@ etc.) y se valida con pruebas automáticas.
 | Carpeta | Contenido |
 |---|---|
 | `src/01_ecuaciones_no_lineales` | `biseccion`, `newton` |
-| `src/02_sistemas_lineales` | `sustitucion_adelante`, `sustitucion_atras`, `gauss_naive`, `gauss_pivoteo`, `lu_factorizacion`, `resolver_lu`, `jacobi`, `gauss_seidel`, `newton_sistema` (sistemas no lineales) |
+| `src/02_sistemas_lineales` | `sustitucion_adelante`, `sustitucion_atras`, `gauss_naive`, `gauss_pivoteo`, `lu_factorizacion`, `resolver_lu`, `jacobi`, `gauss_seidel` |
 | `src/03_optimizacion` | `seccion_aurea`, `newton_optimizacion` (1D, sin restricciones) |
 | `src/04_interpolacion_regresion` | `lagrange` |
 | `src/05_diferenciacion` | `dif_primera` (adelante/atrás/central), `dif_segunda_central` |
 | `src/06_integracion` | `trapecio`, `simpson13`, `simpson38`, `boole` |
-| `src/07_edos` | `euler_explicito`, `euler_implicito`, `heun` (escalares y sistemas) |
+| `src/07_edos` | `euler_explicito`, `heun` (escalares y sistemas), `euler_implicito` (sistemas lineales `y' = A y`) |
 | `tests/` | Pruebas automáticas |
 | `ejemplos/` | Ejemplos con problemas de química |
 
@@ -49,13 +49,13 @@ en varios casos, grafican):
 | `ej_02_ax_b_gauss_y_lu_simple` | Gauss y LU para una A, b fijas |
 | `ej_03_ax_b_gauss_y_lu_pivoteo_parcial` | Pivote nulo y pivote diminuto |
 | `ej_04_ax_b_jacobi_y_gauss_seidel` | Iterativos en sistema diagonalmente dominante |
-| `ej_05_sistema_no_lineal_newton` | Sistema 3×3 clásico (Burden & Faires) |
+| `ej_05_sistema_no_lineal_newton` | Newton para sistemas (armado en el script), sistema 3×3 clásico de Burden & Faires |
 | `ej_06_optimizacion_seccion_dorada_y_newton` | Máximo de 2 sin x − x²/10 |
 | `ej_07_interpolacion_lagrange_y_vandermonde` | Presión de vapor del agua: Vandermonde (armado en el script) y Lagrange |
 | `ej_08_ajuste_de_curvas` | Regresión simple, polinómica y múltiple con ecuaciones normales |
 | `ej_09_diferenciacion_numerica` | 1ª y 2ª derivada, orden de convergencia |
 | `ej_10_integracion_numerica` | Trapecio, Simpson 1/3, 3/8 y Boole |
-| `ej_11_edo_simple` | Reacción de 2º orden con los tres métodos |
+| `ej_11_edo_simple` | Reacción de 1er orden con los tres métodos |
 | `ej_12_sistema_de_edos` | Reducción de orden y modelo compartimental |
 
 ```matlab
