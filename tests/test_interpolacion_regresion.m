@@ -1,12 +1,23 @@
 function test_interpolacion_regresion()
 % Lagrange y regresion lineal generalizada.
 
-% Lagrange reproduce exactamente un polinomio de grado <= n-1
+% Lagrange: coeficientes de un polinomio de grado <= n-1 (potencias descendentes)
 p = @(x) 3 * x.^3 - 2 * x + 5;
 xn = [-1 0 1 2];
 xq = linspace(-1, 2, 7);
-assert(max(abs(lagrange(xn, p(xn), xq) - p(xq))) < 1e-12, 'lagrange polinomio');
-assert(abs(lagrange(xn, p(xn), xn(2)) - p(xn(2))) < 1e-14, 'lagrange en nodo');
+[c, L] = lagrange(xn, p(xn));
+assert(norm(c - [3 0 -2 5]) < 1e-10, 'lagrange coeficientes');
+assert(max(abs(polyval(c, xq) - p(xq))) < 1e-10, 'lagrange evaluado');
+assert(norm(c - p(xn) * L) < 1e-12, 'p = y''*L');
+for i = 1:4          % la base vale 1 en su nodo y 0 en los demas
+    for j = 1:4
+        assert(abs(polyval(L(i, :), xn(j)) - (i == j)) < 1e-12, 'base de Lagrange');
+    end
+end
+assert(norm(lagrange([0 1 2], [1 3 7]) - [1 1 1]) < 1e-12, 'lagrange x^2+x+1');
+ok = false;
+try, lagrange([1 1 2], [1 2 3]); catch, ok = true; end
+assert(ok, 'lagrange debe rechazar nodos repetidos');
 
 % Recta exacta
 x = (0:5)'; y = 2 * x + 1;
