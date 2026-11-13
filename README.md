@@ -1,9 +1,10 @@
 # Cálculo Numérico para Ingeniería Química y de Alimentos
 
-[![Pruebas](https://github.com/jhabriel/metodos-numericos-quimica/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/metodos-numericos-quimica/actions/workflows/tests.yml)
+[![Pruebas](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml)
 
 Implementaciones didácticas de métodos de cálculo numérico en **MATLAB/Octave**,
-pensadas para estudiantes de la Facultad de Ciencias Químicas. El código prioriza
+pensadas para estudiantes de Ingeniería Química e Ingeniería de Alimentos de la
+Facultad de Ciencias Químicas. El código prioriza
 la claridad: cada método de `src/` está escrito "a mano" (sin llamar a `\`, `lu`,
 `interp1`, etc.); los ejemplos solo usan funciones nativas como referencia, para
 graficar o para evaluar (`polyval`). Los métodos se validan con pruebas automáticas
