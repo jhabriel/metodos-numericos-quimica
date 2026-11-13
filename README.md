@@ -87,3 +87,10 @@ octave --no-gui --eval "run('tests/run_all_tests.m')"
 1. Crear `src/<tema>/nombre.m` con encabezado de ayuda (uso, argumentos, salidas).
 2. Agregar pruebas en `tests/test_<tema>.m` (comparar contra solución exacta o contra el operador nativo).
 3. Listarlo en esta tabla y ejecutar `run_all_tests`.
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia **GNU General Public License v3.0**
+(GPL-3.0). Puedes usar, estudiar, modificar y redistribuir el código, siempre que
+las obras derivadas se distribuyan bajo la misma licencia. Ver el archivo
+[`LICENSE`](LICENSE) para el texto completo.
