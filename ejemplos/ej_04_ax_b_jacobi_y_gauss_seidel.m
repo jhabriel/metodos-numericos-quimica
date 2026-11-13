@@ -28,12 +28,6 @@ fprintf('\nJacobi       : %2d iteraciones, error = %.2e\n', itj, norm(xj - xref,
 fprintf('Gauss-Seidel : %2d iteraciones, error = %.2e\n', itg, norm(xg - xref, inf));
 fprintf('x (Gauss-Seidel) = [%s]\n', num2str(xg', ' %.8f'));
 
-%% Radio espectral de las matrices de iteracion (converge si < 1)
-D = diag(diag(A)); Lw = tril(A, -1); Uw = triu(A, 1);
-rho = @(T) max(abs(eig(T)));
-fprintf('\nRadio espectral: Jacobi = %.4f,  Gauss-Seidel = %.4f\n', ...
-        rho(-D \ (Lw + Uw)), rho(-(D + Lw) \ Uw));
-
 %% Convergencia
 figure;
 semilogy(hj(:, 1), hj(:, 2), 'o-', hg(:, 1), hg(:, 2), 's-', 'LineWidth', 1.3);
