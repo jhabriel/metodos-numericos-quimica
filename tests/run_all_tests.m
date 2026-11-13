@@ -7,8 +7,7 @@ addpath(genpath(fullfile(raiz, 'src')));
 addpath(fullfile(raiz, 'tests'));
 
 pruebas = {'test_no_lineales', 'test_sistemas_lineales', 'test_optimizacion', ...
-           'test_interpolacion_regresion', 'test_diferenciacion', ...
-           'test_integracion', 'test_edos'};
+           'test_interpolacion_regresion', 'test_edos'};
 
 fallos = 0;
 for i = 1:numel(pruebas)

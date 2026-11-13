@@ -6,33 +6,67 @@
 %
 % (trabajo isotermico reversible de un gas ideal: W = n R T * I)
 %
-% Se usan n = 12, 24, 48, 96 subintervalos: multiplos de 1, 2, 3 y 4, de modo
-% que las cuatro formulas son aplicables con el mismo n.
+% Con n subintervalos, h = (b - a)/n y nodos x_i = a + i h (i = 0, ..., n),
+% cada formula es una suma ponderada de los valores y_i = f(x_i):
+%
+%   Trapecio     (h/2)   * sum w_i y_i,  w = [1 2 2 ... 2 1]              cualquier n
+%   Simpson 1/3  (h/3)   * sum w_i y_i,  w = [1 4 2 4 2 ... 4 1]          n par
+%   Simpson 3/8  (3h/8)  * sum w_i y_i,  w = [1 3 3 2 3 3 2 ... 3 3 1]    n multiplo de 3
+%   Boole        (2h/45) * sum w_i y_i,  w = [7 32 12 32 14 32 12 32 14 ... 7]
+%                                                                        n multiplo de 4
+%
+% Se usan n = 12, 24, 48, 96: multiplos de 1, 2, 3 y 4, de modo que las cuatro
+% formulas son aplicables con el mismo n.
 %
 % Ejecutar:  run('ejemplos/ej_10_integracion_numerica.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 f = @(x) 1 ./ x;
 a = 1; b = 2;
 Iex = log(2);
 
 n = [12 24 48 96];
-E = zeros(numel(n), 4);
+I = zeros(numel(n), 4);          % columnas: trapecio, Simpson 1/3, Simpson 3/8, Boole
 for k = 1:numel(n)
-    E(k, 1) = abs(trapecio(f, a, b, n(k)) - Iex);
-    E(k, 2) = abs(simpson13(f, a, b, n(k)) - Iex);
-    E(k, 3) = abs(simpson38(f, a, b, n(k)) - Iex);
-    E(k, 4) = abs(boole(f, a, b, n(k)) - Iex);
+    nk = n(k);
+    h = (b - a) / nk;
+    x = a + (0:nk) * h;          % nodos
+    y = f(x);                    % valores en los nodos
+
+    % Trapecio: pesos [1 2 2 ... 2 1]
+    w = 2 * ones(1, nk + 1);
+    w([1 end]) = 1;
+    I(k, 1) = h / 2 * sum(w .* y);
+
+    % Simpson 1/3: pesos [1 4 2 4 2 ... 4 1]
+    w = 2 * ones(1, nk + 1);
+    w(2:2:nk) = 4;
+    w([1 end]) = 1;
+    I(k, 2) = h / 3 * sum(w .* y);
+
+    % Simpson 3/8: pesos [1 3 3 2 3 3 2 ... 3 3 1]
+    w = 3 * ones(1, nk + 1);
+    w(4:3:nk) = 2;
+    w([1 end]) = 1;
+    I(k, 3) = 3 * h / 8 * sum(w .* y);
+
+    % Boole: pesos [7 32 12 32 14 32 12 32 14 ... 7]
+    w = 14 * ones(1, nk + 1);
+    w(2:2:nk) = 32;
+    w(3:4:nk) = 12;
+    w([1 end]) = 7;
+    I(k, 4) = 2 * h / 45 * sum(w .* y);
 end
+
+E = abs(I - Iex);                % errores absolutos
 
 fprintf('Integral exacta = ln 2 = %.12f\n\n', Iex);
 fprintf('Valores con n = 12:\n');
-fprintf('  Trapecio     : %.12f\n', trapecio(f, a, b, 12));
-fprintf('  Simpson 1/3  : %.12f\n', simpson13(f, a, b, 12));
-fprintf('  Simpson 3/8  : %.12f\n', simpson38(f, a, b, 12));
-fprintf('  Boole        : %.12f\n\n', boole(f, a, b, 12));
+fprintf('  Trapecio     : %.12f\n', I(1, 1));
+fprintf('  Simpson 1/3  : %.12f\n', I(1, 2));
+fprintf('  Simpson 3/8  : %.12f\n', I(1, 3));
+fprintf('  Boole        : %.12f\n\n', I(1, 4));
 
 fprintf('Errores absolutos:\n');
 fprintf('   n     trapecio    Simpson1/3  Simpson3/8     Boole\n');

@@ -5,24 +5,34 @@
 %   f'(x)  = exp(x) (sin x + cos x)
 %   f''(x) = 2 exp(x) cos x
 %
+% Formulas (h = paso):
+%   adelante   f'(x) ~ ( f(x+h) - f(x)   ) / h             error O(h)
+%   atras      f'(x) ~ ( f(x)   - f(x-h) ) / h             error O(h)
+%   central    f'(x) ~ ( f(x+h) - f(x-h) ) / (2h)          error O(h^2)
+%   2da central f''(x) ~ ( f(x+h) - 2 f(x) + f(x-h) ) / h^2  error O(h^2)
+%
 % Ejecutar:  run('ejemplos/ej_09_diferenciacion_numerica.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 f = @(x) exp(x) .* sin(x);
 x0 = 1;
-d1 = exp(x0) * (sin(x0) + cos(x0));
-d2 = 2 * exp(x0) * cos(x0);
+d1 = exp(x0) * (sin(x0) + cos(x0));        % derivada exacta
+d2 = 2 * exp(x0) * cos(x0);                % segunda derivada exacta
 
-h = 0.4 ./ 2.^(0:6);
-ead = zeros(size(h)); eat = ead; ece = ead; e2 = ead;
-for k = 1:numel(h)
-    ead(k) = abs(dif_primera(f, x0, h(k), 'adelante') - d1);
-    eat(k) = abs(dif_primera(f, x0, h(k), 'atras')    - d1);
-    ece(k) = abs(dif_primera(f, x0, h(k), 'central')  - d1);
-    e2(k)  = abs(dif_segunda_central(f, x0, h(k))     - d2);
-end
+h = 0.4 ./ 2.^(0:6);                       % pasos: 0.4, 0.2, 0.1, ...
+
+% Las formulas se evaluan para todos los h a la vez (h es un vector)
+dadl = (f(x0 + h) - f(x0)) ./ h;                       % adelante
+datr = (f(x0) - f(x0 - h)) ./ h;                       % atras
+dcen = (f(x0 + h) - f(x0 - h)) ./ (2 * h);             % central
+d2c  = (f(x0 + h) - 2 * f(x0) + f(x0 - h)) ./ h.^2;    % segunda derivada, central
+
+% Errores absolutos
+ead = abs(dadl - d1);
+eat = abs(datr - d1);
+ece = abs(dcen - d1);
+e2  = abs(d2c - d2);
 
 fprintf('f''(1) exacta = %.8f,   f''''(1) exacta = %.8f\n\n', d1, d2);
 fprintf('Errores absolutos:\n');

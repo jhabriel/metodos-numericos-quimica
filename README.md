@@ -13,9 +13,7 @@ etc.) y se valida con pruebas automáticas.
 | `src/02_sistemas_lineales` | `sustitucion_adelante`, `sustitucion_atras`, `gauss_naive`, `gauss_pivoteo`, `lu_factorizacion`, `resolver_lu`, `jacobi`, `gauss_seidel` |
 | `src/03_optimizacion` | `seccion_aurea` (1D, sin restricciones) |
 | `src/04_interpolacion_regresion` | `lagrange` |
-| `src/05_diferenciacion` | `dif_primera` (adelante/atrás/central), `dif_segunda_central` |
-| `src/06_integracion` | `trapecio`, `simpson13`, `simpson38`, `boole` |
-| `src/07_edos` | `euler_explicito`, `heun` (escalares y sistemas), `euler_implicito` (sistemas lineales `y' = A y`) |
+| `src/05_edos` | `euler_explicito`, `heun` (escalares y sistemas), `euler_implicito` (sistemas lineales `y' = A y`) |
 | `tests/` | Pruebas automáticas |
 | `ejemplos/` | Ejemplos con problemas de química |
 
@@ -32,8 +30,6 @@ x2 = newton(f, @(x) 2*x, 1);
 
 A = [4 -2 1; -2 4 -2; 1 -2 4];  b = [11; -16; 17];
 x = resolver_lu(A, b);
-
-I = simpson13(@(x) sin(x), 0, pi, 20);
 ```
 
 Cada función documenta sus argumentos con `help nombre_funcion`.
@@ -53,8 +49,8 @@ en varios casos, grafican):
 | `ej_06_optimizacion_seccion_dorada_y_newton` | Máximo de 2 sin x − x²/10 |
 | `ej_07_interpolacion_lagrange_y_vandermonde` | Presión de vapor del agua: Vandermonde (armado en el script) y Lagrange |
 | `ej_08_ajuste_de_curvas` | Regresión simple, polinómica y múltiple con ecuaciones normales |
-| `ej_09_diferenciacion_numerica` | 1ª y 2ª derivada, orden de convergencia |
-| `ej_10_integracion_numerica` | Trapecio, Simpson 1/3, 3/8 y Boole |
+| `ej_09_diferenciacion_numerica` | 1ª y 2ª derivada con diferencias finitas, orden de convergencia (fórmulas en el script) |
+| `ej_10_integracion_numerica` | Trapecio, Simpson 1/3, 3/8 y Boole con vectores de pesos (en el script) |
 | `ej_11_edo_simple` | Reacción de 1er orden con los tres métodos |
 | `ej_12_sistema_de_edos` | Reducción de orden y modelo compartimental |
 
@@ -79,7 +75,7 @@ octave --no-gui --eval "run('tests/run_all_tests.m')"
 - Nombres de funciones en español, `snake_case`, un método por archivo.
 - Compatible con MATLAB y Octave (sin sintaxis exclusiva de uno u otro).
 - Sistemas de EDO: `f(t, y)` devuelve columna; la salida `Y` tiene una fila por instante.
-- Restricciones de `n` en integración: Simpson 1/3 → par; Simpson 3/8 → múltiplo de 3; Boole → múltiplo de 4.
+- Diferenciación e integración numérica no tienen funciones en `src/`: las fórmulas se escriben directamente en `ej_09` y `ej_10`. Restricciones de `n` en integración: Simpson 1/3 → par; Simpson 3/8 → múltiplo de 3; Boole → múltiplo de 4.
 
 ## Agregar un método nuevo
 
