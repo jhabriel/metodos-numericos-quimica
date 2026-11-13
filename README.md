@@ -11,7 +11,7 @@ etc.) y se valida con pruebas automáticas.
 |---|---|
 | `src/01_ecuaciones_no_lineales` | `biseccion`, `newton` |
 | `src/02_sistemas_lineales` | `sustitucion_adelante`, `sustitucion_atras`, `gauss_naive`, `gauss_pivoteo`, `lu_factorizacion`, `resolver_lu`, `jacobi`, `gauss_seidel` |
-| `src/03_optimizacion` | `seccion_aurea`, `newton_optimizacion` (1D, sin restricciones) |
+| `src/03_optimizacion` | `seccion_aurea` (1D, sin restricciones) |
 | `src/04_interpolacion_regresion` | `lagrange` |
 | `src/05_diferenciacion` | `dif_primera` (adelante/atrás/central), `dif_segunda_central` |
 | `src/06_integracion` | `trapecio`, `simpson13`, `simpson38`, `boole` |
