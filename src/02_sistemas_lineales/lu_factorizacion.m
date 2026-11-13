@@ -13,8 +13,8 @@ if size(A, 2) ~= n
 end
 
 U = A;
-L = eye(n);
-P = eye(n);
+L = full(eye(n));
+P = full(eye(n));
 
 for k = 1:n-1
     [pmax, idx] = max(abs(U(k:n, k)));

@@ -28,6 +28,18 @@ assert(norm(sustitucion_adelante(L2, [2; 7; 32]) - L2 \ [2; 7; 32]) < 1e-12, 'ad
 U2 = L2';
 assert(norm(sustitucion_atras(U2, [2; 7; 32]) - U2 \ [2; 7; 32]) < 1e-12, 'atras');
 
+% Metodos iterativos (diagonalmente dominante)
+D = [10 -1 2 0; -1 11 -1 3; 2 -1 10 -1; 0 3 -1 8];
+d = [6; 25; -11; 15];
+[xj, itj] = jacobi(D, d, [], 1e-12);
+[xg, itg] = gauss_seidel(D, d, [], 1e-12);
+assert(norm(xj - [1; 2; -1; 1]) < 1e-10, 'jacobi');
+assert(norm(xg - [1; 2; -1; 1]) < 1e-10, 'gauss_seidel');
+assert(itg < itj, 'Gauss-Seidel converge en menos iteraciones que Jacobi aqui');
+ok = false;
+try, jacobi([0 1; 1 0], [1; 1]); catch, ok = true; end
+assert(ok, 'jacobi debe rechazar diagonal nula');
+
 % Aleatoria
 rand('seed', 1); %#ok<RAND>
 M = rand(6) + 6 * eye(6); r = rand(6, 1);

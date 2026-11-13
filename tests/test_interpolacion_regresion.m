@@ -20,6 +20,13 @@ a = regresion_lineal_general(x, y, {@(x) ones(size(x)), @(x) x, @(x) x.^2});
 pf = polyfit(x, y, 2);
 assert(norm(a - fliplr(pf)') < 1e-8, 'parabola vs polyfit');
 
+% Regresion multiple: plano exacto y = 1 + 2*x1 - 3*x2
+[X1, X2] = meshgrid(0:2, 0:3);
+X = [X1(:), X2(:)]; y = 1 + 2 * X(:, 1) - 3 * X(:, 2);
+bm = {@(X) ones(size(X, 1), 1), @(X) X(:, 1), @(X) X(:, 2)};
+[a, r2] = regresion_lineal_general(X, y, bm);
+assert(norm(a - [1; 2; -3]) < 1e-10 && abs(r2 - 1) < 1e-12, 'regresion multiple');
+
 % Arrhenius: ln k = ln A - Ea/(R T)
 R = 8.314; A0 = 1e10; Ea = 75e3;
 T = [300 310 320 330 340]';
