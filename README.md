@@ -90,6 +90,8 @@ octave --no-gui --eval "run('tests/run_all_tests.m')"
 
 ## Licencia
 
+Copyright © 2026 Equipo Docente - Cálculo Numérico - FCQ-UNA
+
 Este proyecto se distribuye bajo la licencia **GNU General Public License v3.0**
 (GPL-3.0). Puedes usar, estudiar, modificar y redistribuir el código, siempre que
 las obras derivadas se distribuyan bajo la misma licencia. Ver el archivo
