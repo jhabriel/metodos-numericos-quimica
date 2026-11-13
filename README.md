@@ -50,7 +50,7 @@ en varios casos, grafican):
 | `ej_07_interpolacion_lagrange_y_vandermonde` | Presión de vapor del agua: Vandermonde (armado en el script) y Lagrange |
 | `ej_08_ajuste_de_curvas` | Regresión simple, polinómica y múltiple con ecuaciones normales |
 | `ej_09_diferenciacion_numerica` | 1ª y 2ª derivada con diferencias finitas, orden de convergencia (fórmulas en el script) |
-| `ej_10_integracion_numerica` | Trapecio, Simpson 1/3, 3/8 y Boole con vectores de pesos (en el script) |
+| `ej_10_integracion_numerica` | Trapecio, Simpson 1/3, 3/8 y Boole (fórmulas de una aplicación) con error relativo verdadero |
 | `ej_11_edo_simple` | Reacción de 1er orden con los tres métodos |
 | `ej_12_sistema_de_edos` | Reducción de orden y modelo compartimental |
 
@@ -75,7 +75,7 @@ octave --no-gui --eval "run('tests/run_all_tests.m')"
 - Nombres de funciones en español, `snake_case`, un método por archivo.
 - Compatible con MATLAB y Octave (sin sintaxis exclusiva de uno u otro).
 - Sistemas de EDO: `f(t, y)` devuelve columna; la salida `Y` tiene una fila por instante.
-- Diferenciación e integración numérica no tienen funciones en `src/`: las fórmulas se escriben directamente en `ej_09` y `ej_10`. Restricciones de `n` en integración: Simpson 1/3 → par; Simpson 3/8 → múltiplo de 3; Boole → múltiplo de 4.
+- Diferenciación e integración numérica no tienen funciones en `src/`: las fórmulas se escriben directamente en `ej_09` y `ej_10`.
 
 ## Agregar un método nuevo
 

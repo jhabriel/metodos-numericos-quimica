@@ -1,7 +1,8 @@
 % EJ_12_SISTEMA_DE_EDOS
 % Sistemas de EDOs con los tres metodos:
 %   A) Reduccion de orden: oscilador amortiguado  x'' + 2*zeta*w*x' + w^2*x = 0
-%      se escribe como sistema de primer orden con y1 = x, y2 = x'.
+%      se escribe como sistema de primer orden con u1 = x (posicion) y
+%      u2 = x' (velocidad):   u1' = u2,   u2' = -2*zeta*w*u2 - w^2*u1.
 %   B) Modelo compartimental (farmacocinetica de dos compartimentos con
 %      absorcion oral y eliminacion):
 %        dA/dt  = -ka A                          (tracto gastrointestinal)
@@ -17,29 +18,31 @@ addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 %% A) Oscilador amortiguado: reduccion de orden
 w = 2 * pi;  zeta = 0.1;
-% Reduccion de orden con y = [x; v]:   x' = v,   v' = -2 zeta w v - w^2 x
-% es decir  y' = AA * y  con
+% Reduccion de orden con u1 = x (posicion), u2 = x' (velocidad):
+%     u1' = u2
+%     u2' = -2 zeta w u2 - w^2 u1
+% es decir  u' = AA * u  con  u = [u1; u2]  y
 AA = [ 0,    1;
       -w^2, -2*zeta*w ];
-fA = @(t, y) AA * y;
-yA0 = [1; 0];                                  % x(0) = 1, x'(0) = 0
+fA = @(t, u) AA * u;
+uA0 = [1; 0];                                  % u1(0) = x(0) = 1,  u2(0) = x'(0) = 0
 tfA = 5; nA = 500;
 
 wd = w * sqrt(1 - zeta^2);
-xex = @(t) exp(-zeta*w*t) .* (cos(wd*t) + zeta*w/wd * sin(wd*t));
+u1ex = @(t) exp(-zeta*w*t) .* (cos(wd*t) + zeta*w/wd * sin(wd*t));
 
-[tA, YE] = euler_explicito(fA, [0 tfA], yA0, nA);
-[~,  YI] = euler_implicito(AA, [0 tfA], yA0, nA);
-[~,  YH] = heun(fA, [0 tfA], yA0, nA);
+[tA, UE] = euler_explicito(fA, [0 tfA], uA0, nA);
+[~,  UI] = euler_implicito(AA, [0 tfA], uA0, nA);
+[~,  UH] = heun(fA, [0 tfA], uA0, nA);
 
-fprintf('A) Oscilador amortiguado, h = %.3f, error maximo |x - x_exacta|:\n', tfA / nA);
-fprintf('   Euler explicito : %.3e  (la amplitud crece artificialmente)\n', max(abs(YE(:, 1) - xex(tA))));
-fprintf('   Euler implicito : %.3e  (amortigua de mas)\n', max(abs(YI(:, 1) - xex(tA))));
-fprintf('   Heun            : %.3e\n\n', max(abs(YH(:, 1) - xex(tA))));
+fprintf('A) Oscilador amortiguado, h = %.3f, error maximo |u1 - u1_exacta|:\n', tfA / nA);
+fprintf('   Euler explicito : %.3e  (la amplitud crece artificialmente)\n', max(abs(UE(:, 1) - u1ex(tA))));
+fprintf('   Euler implicito : %.3e  (amortigua de mas)\n', max(abs(UI(:, 1) - u1ex(tA))));
+fprintf('   Heun            : %.3e\n\n', max(abs(UH(:, 1) - u1ex(tA))));
 
 figure;
-plot(tA, xex(tA), 'k-', tA, YE(:, 1), 'r--', tA, YI(:, 1), 'g--', tA, YH(:, 1), 'b-.', 'LineWidth', 1.2);
-xlabel('t'); ylabel('x(t)'); grid on;
+plot(tA, u1ex(tA), 'k-', tA, UE(:, 1), 'r--', tA, UI(:, 1), 'g--', tA, UH(:, 1), 'b-.', 'LineWidth', 1.2);
+xlabel('t'); ylabel('u_1(t) = x(t)'); grid on;
 legend('Exacta', 'E. explicito', 'E. implicito', 'Heun');
 title('A) x'''' + 2\zeta\omega x'' + \omega^2 x = 0');
 

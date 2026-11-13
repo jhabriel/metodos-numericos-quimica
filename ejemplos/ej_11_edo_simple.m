@@ -9,11 +9,11 @@
 clear; clc; close all;
 addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
-k = 0.5;            % 1/s
-C0 = 2;             % mol/L
-tf = 10;            % s
-f = @(t, C) -k * C;
-A = -k;                          % dC/dt = A*C (lo usa Euler implicito)
+k = 0.5;             % 1/s
+C0 = 2;              % mol/L
+tf = 10;             % s
+f = @(t, C) -k * C;  % funcion anonima de la var. indep. y de la var. dep.
+A = -k;              % dC/dt = A*C (lo usa Euler implicito)
 Cex = @(t) C0 * exp(-k * t);
 
 %% Una corrida con n = 20 pasos
