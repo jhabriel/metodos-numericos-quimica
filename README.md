@@ -1,5 +1,7 @@
 # Métodos numéricos para Ciencias Químicas
 
+[![Pruebas](https://github.com/jhabriel/metodos-numericos-quimica/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/metodos-numericos-quimica/actions/workflows/tests.yml)
+
 Implementaciones didácticas de métodos de cálculo numérico en **MATLAB/Octave**,
 pensadas para estudiantes de la Facultad de Ciencias Químicas. El código prioriza
 la claridad: cada método de `src/` está escrito "a mano" (sin llamar a `\`, `lu`,
