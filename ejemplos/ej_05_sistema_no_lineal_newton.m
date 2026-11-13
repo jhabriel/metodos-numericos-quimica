@@ -14,10 +14,10 @@
 %
 % y se actualiza x_{k+1} = x_k + dx, donde J es el jacobiano analitico de F.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_05_sistema_no_lineal_newton.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 % Funcion no lineal R^3 -> R^3
 F = @(x) [ 3*x(1) - cos(x(2)*x(3)) - 1/2;

@@ -2,10 +2,10 @@
 % Sistemas donde Gauss sin pivoteo falla (pivote nulo) o es inexacto (pivote
 % diminuto). El pivoteo parcial por filas lo resuelve en ambos casos.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_03_ax_b_gauss_y_lu_pivoteo_parcial.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 %% Parte 1: pivote nulo (a11 = 0)
 A = [0 2 1;

@@ -4,10 +4,10 @@
 % Se resuelve con Euler explicito, Euler implicito y Heun.
 % (Euler implicito se usa para sistemas lineales y' = A y; aqui A = -k.)
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_11_edo_simple.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 k = 0.5;             % 1/s
 C0 = 2;              % mol/L

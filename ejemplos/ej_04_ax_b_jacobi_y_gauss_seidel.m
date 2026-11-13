@@ -1,10 +1,10 @@
 % EJ_04_AX_B_JACOBI_Y_GAUSS_SEIDEL
 % Metodos iterativos para un sistema diagonalmente dominante por filas.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_04_ax_b_jacobi_y_gauss_seidel.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 A = [10 -1  2  0;
      -1 11 -1  3;

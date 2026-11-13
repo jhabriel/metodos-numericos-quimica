@@ -11,10 +11,10 @@
 %        dE/dt  =  k10 C1                          (eliminado)
 %      La masa total A + C1 + C2 + E se conserva.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_12_sistema_de_edos.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 %% A) Oscilador amortiguado: reduccion de orden
 w = 2 * pi;  zeta = 0.1;

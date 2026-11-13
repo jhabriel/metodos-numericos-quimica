@@ -15,10 +15,10 @@
 %   B) Regresion polinomica      : Cp(T) de un gas (valores aproximados CO2)
 %   C) Regresion lineal multiple : rendimiento vs temperatura y concentracion
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_08_ajuste_de_curvas.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 % Coeficiente de determinacion: R^2 = 1 - Sr/St
 %   Sr = suma de cuadrados de los residuos, St = suma de cuadrados respecto a la media

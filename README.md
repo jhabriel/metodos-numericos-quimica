@@ -2,6 +2,32 @@
 
 [![Pruebas](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml)
 
+<p align="center">
+  <img alt="PASO OBLIGATORIO: ejecutar iniciar" src="https://img.shields.io/badge/%F0%9F%9A%A8_PASO_OBLIGATORIO-EJECUTAR_iniciar-red?style=for-the-badge">
+</p>
+
+> [!CAUTION]
+> ## 🚨🚨🚨 ANTES DE USAR CUALQUIER FUNCIÓN O EJEMPLO: ejecuta `iniciar` 🚨🚨🚨
+>
+> MATLAB y Octave **olvidan el path cada vez que se cierran**. Cada vez que abras el programa:
+>
+> 1. 📂 Ve a la **carpeta raíz** del repositorio (la que contiene `iniciar.m`).
+> 2. ⌨️ Escribe en la ventana de comandos:
+>
+>    ```matlab
+>    iniciar
+>    ```
+>
+> 3. ✅ Verás el mensaje `Listo: las funciones de src/ estan disponibles en esta sesion.`
+>    A partir de ahí, los ejemplos y **tus propios scripts** (por ejemplo en `examen/`)
+>    pueden llamar a las funciones sin agregar nada al path.
+>
+> ❌ **Si no lo haces**, todo fallará con errores como `'biseccion' undefined`.
+> **No es un error de tu código**: solo falta ejecutar `iniciar`.
+>
+> ¿No estás en la carpeta raíz? Ejecútalo con la ruta completa:
+> `run('/ruta/al/repositorio/iniciar.m')`
+
 Implementaciones didácticas de métodos de cálculo numérico en **MATLAB/Octave**,
 pensadas para estudiantes de Ingeniería Química e Ingeniería de Alimentos de la
 Facultad de Ciencias Químicas. El código prioriza
@@ -27,10 +53,10 @@ MATLAB, pero esa combinación todavía no se ha probado.
 
 ## Uso
 
-Desde la raíz del repositorio:
+Desde la raíz del repositorio, después de ejecutar `iniciar`:
 
 ```matlab
-addpath(genpath(fullfile(pwd, 'src')));   % ruta absoluta (pwd = raíz del repositorio)
+iniciar                                   % una sola vez por sesión (ver aviso al inicio)
 
 f  = @(x) x.^2 - 2;
 x  = biseccion(f, 0, 2, 1e-10);
@@ -42,14 +68,13 @@ x = resolver_lu(A, b);
 
 Cada función documenta sus argumentos con `help nombre_funcion`.
 
-> Usa siempre la ruta **absoluta** (`fullfile(pwd, 'src')`): con `addpath(genpath('src'))`
-> Octave avisa de rutas que "no existen" al ejecutar un ejemplo con `run`, porque `run`
-> cambia temporalmente de carpeta.
+> Tus propios scripts (por ejemplo en `examen/`) **no necesitan** `addpath`: basta con haber
+> ejecutado `iniciar` en la sesión, sin importar en qué carpeta estén.
 
 ### Ejemplos
 
-Un script por sección en `ejemplos/`, listos para ejecutar (imprimen resultados y,
-en varios casos, grafican):
+Un script por sección en `ejemplos/`, listos para ejecutar **después de `iniciar`** (imprimen
+resultados y, en varios casos, grafican):
 
 | Script | Tema |
 |---|---|
@@ -85,6 +110,7 @@ octave --no-gui --eval "run('tests/run_all_tests.m')"
 ## Convenciones
 
 - Nombres de funciones en español, `snake_case`, un método por archivo.
+- Los scripts no llevan `addpath`: se asume que se ejecutó `iniciar` al abrir MATLAB/Octave.
 - Compatible con MATLAB y Octave (sin sintaxis exclusiva de uno u otro).
 - Sistemas de EDO: `f(t, y)` devuelve columna; la salida `Y` tiene una fila por instante.
 - Diferenciación e integración numérica no tienen funciones en `src/`: las fórmulas se escriben directamente en `ej_09` y `ej_10`.

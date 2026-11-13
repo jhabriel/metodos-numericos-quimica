@@ -2,10 +2,10 @@
 % Resuelve A x = b (A y b fijos) con eliminacion de Gauss sin pivoteo y con
 % factorizacion LU, mostrando los pasos intermedios.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_02_ax_b_gauss_y_lu_simple.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 A = [ 4 -2  1;
      -2  4 -2;

@@ -2,10 +2,10 @@
 % Raiz de f(x) = x^3 - 2x - 5 = 0 (ecuacion clasica de Wallis/Newton)
 % por biseccion y por Newton-Raphson.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_01_ecuacion_no_lineal.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 f  = @(x) x.^3 - 2*x - 5;
 df = @(x) 3*x.^2 - 2;

@@ -6,7 +6,7 @@ raiz = fileparts(fileparts(mfilename('fullpath')));
 addpath(genpath(fullfile(raiz, 'src')));
 addpath(fullfile(raiz, 'tests'));
 
-pruebas = {'test_no_lineales', 'test_sistemas_lineales', 'test_optimizacion', ...
+pruebas = {'test_iniciar', 'test_no_lineales', 'test_sistemas_lineales', 'test_optimizacion', ...
            'test_interpolacion_regresion', 'test_edos', 'test_ejemplos'};
 
 fallos = 0;

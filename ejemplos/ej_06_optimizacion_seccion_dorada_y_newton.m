@@ -9,10 +9,10 @@
 % g'(x) = 0:   x_{k+1} = x_k - g'(x_k) / g''(x_k)   ->  newton(dg, d2g, x0).
 % El signo de g'' en el punto hallado dice si es minimo (g'' > 0) o maximo (g'' < 0).
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_06_optimizacion_seccion_dorada_y_newton.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 f = @(x) 2*sin(x) - x.^2/10;               % funcion a MAXIMIZAR
 

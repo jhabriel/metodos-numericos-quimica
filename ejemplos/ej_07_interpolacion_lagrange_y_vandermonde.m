@@ -9,10 +9,10 @@
 % En ambos casos se obtienen los coeficientes del polinomio en potencias
 % descendentes, que se evaluan con polyval.
 %
+% Requisito: haber ejecutado `iniciar` al abrir MATLAB/Octave (ver README).
 % Ejecutar:  run('ejemplos/ej_07_interpolacion_lagrange_y_vandermonde.m')
 
 clear; clc; close all;
-addpath(genpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'src')));
 
 T = [20 30 40 50 60]';                     % C
 P = [2.339 4.246 7.384 12.352 19.946]';    % kPa
