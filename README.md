@@ -1,4 +1,4 @@
-# Métodos numéricos para Ciencias Químicas
+# Cálculo Numérico para Ingeniería Química y de Alimentos
 
 [![Pruebas](https://github.com/jhabriel/metodos-numericos-quimica/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/metodos-numericos-quimica/actions/workflows/tests.yml)
 
