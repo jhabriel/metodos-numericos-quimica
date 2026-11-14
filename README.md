@@ -10,7 +10,7 @@
 > 1. Descarga este repositorio como un `.zip` y descomprímelo.
 > 2. Ingresa a OCTAVE/MATLAB y sitúate en la ventana de comandos.
 > 3. Sitúate en la carpeta descrompida (tienes que poder ver que contiene `iniciar.m`). Para verificar esto, escribe `ls` en la ventana de comandos y fíjate si aparece `iniciar.m`.
-> 5. Escribe en la ventana de comandos:
+> 5. Escribe en la ventana de comandos (y luego Enter):
 >
 >    ```matlab
 >    iniciar
