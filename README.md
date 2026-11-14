@@ -3,27 +3,28 @@
 [![Pruebas](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml/badge.svg)](https://github.com/jhabriel/calculo_numerico_iq_ia/actions/workflows/tests.yml)
 
 > [!IMPORTANT]
-> **Antes de usar las funciones o los ejemplos, ejecuta `iniciar`.**
+> **Antes de usar las funciones o los ejemplos, ejecuta el archivo `iniciar.m`.**
 >
 > MATLAB y Octave olvidan el path cada vez que se cierran, así que al abrir el programa:
 >
-> 1. Ve a la carpeta raíz del repositorio (la que contiene `iniciar.m`).
-> 2. Escribe en la ventana de comandos:
+> 1. Descarga este repositorio como un `.zip` y descomprímelo.
+> 2. Ingresa a OCTAVE/MATLAB y sitúate en la ventana de comandos.
+> 3. Sitúate en la carpeta descrompida (tienes que poder ver que contiene `iniciar.m`). Para verificar esto, escribe `ls` en la ventana de comandos y fíjate si aparece `iniciar.m`.
+> 5. Escribe en la ventana de comandos:
 >
 >    ```matlab
 >    iniciar
 >    ```
 >
-> A partir de ahí, los ejemplos y tus propios scripts (por ejemplo en `examen/`) pueden
-> llamar a las funciones sin agregar nada al path.
+> A partir de ahí, todas las funciones de este repositorio podrán ser usadas como 
+> funciones estándar, sin importar de donde se ejecuten tus scripts.
 >
 > Si no lo haces, verás errores como `'biseccion' undefined`: no es un error de tu
-> código, solo falta ejecutar `iniciar`. Si no estás en la carpeta raíz, usa
-> `run('/ruta/al/repositorio/iniciar.m')`.
+> código, solo falta ejecutar `iniciar`.
 
 Implementaciones didácticas de métodos de cálculo numérico en **MATLAB/Octave**,
 pensadas para estudiantes de Ingeniería Química e Ingeniería de Alimentos de la
-Facultad de Ciencias Químicas. El código prioriza
+Facultad de Ciencias Químicas, Universidad Nacional de Asunción. El código prioriza
 la claridad: cada método de `src/` está escrito "a mano" (sin llamar a `\`, `lu`,
 `interp1`, etc.); los ejemplos solo usan funciones nativas como referencia, para
 graficar o para evaluar (`polyval`). Los métodos se validan con pruebas automáticas
@@ -42,7 +43,7 @@ MATLAB, pero esa combinación todavía no se ha probado.
 | `src/04_interpolacion_regresion` | `lagrange` |
 | `src/05_edos` | `euler_explicito`, `heun` (escalares y sistemas), `euler_implicito` (sistemas lineales `y' = A y`) |
 | `tests/` | Pruebas automáticas |
-| `ejemplos/` | Ejemplos con problemas de química |
+| `ejemplos/` | Ejemplos con problemas de ingeniería química y alimentos |
 
 ## Uso
 
@@ -60,9 +61,6 @@ x = resolver_lu(A, b);
 ```
 
 Cada función documenta sus argumentos con `help nombre_funcion`.
-
-> Tus propios scripts (por ejemplo en `examen/`) **no necesitan** `addpath`: basta con haber
-> ejecutado `iniciar` en la sesión, sin importar en qué carpeta estén.
 
 ### Ejemplos
 
@@ -84,11 +82,8 @@ resultados y, en varios casos, grafican):
 | `ej_11_edo_simple` | Reacción de 1er orden con los tres métodos |
 | `ej_12_sistema_de_edos` | Reducción de orden y modelo compartimental |
 
-```matlab
-run('ejemplos/ej_04_ax_b_jacobi_y_gauss_seidel.m')
-```
 
-## Pruebas
+## Pruebas (ignorar esto si eres alumno)
 
 ```matlab
 run('tests/run_all_tests.m')
@@ -108,7 +103,7 @@ octave --no-gui --eval "run('tests/run_all_tests.m')"
 - Sistemas de EDO: `f(t, y)` devuelve columna; la salida `Y` tiene una fila por instante.
 - Diferenciación e integración numérica no tienen funciones en `src/`: las fórmulas se escriben directamente en `ej_09` y `ej_10`.
 
-## Agregar un método nuevo
+## Agregar un método nuevo (Ignorar esto si eres alumno)
 
 1. Crear `src/<tema>/nombre.m` con encabezado de ayuda (uso, argumentos, salidas).
 2. Agregar pruebas en `tests/test_<tema>.m` (comparar contra solución exacta o contra el operador nativo).
